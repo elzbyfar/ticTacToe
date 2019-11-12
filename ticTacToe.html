@@ -10,6 +10,10 @@
     <body>
         <div class="background">
         <table>
+            <div>
+                <img class="x" id="x" src="images/X.png" width="50"/>
+                <img class="o" id="o" src="images/O.png" width="50"/>
+            </div>
             <tr>
                 <td class="cell" id="0"></td>
                 <td class="cell" id="1"></td>
@@ -26,12 +30,12 @@
                 <td class="cell" id="8"></td>
             </tr>
         </table>
-
         <div class="endGame">
             <div class="text"></div>
+            <button onClick="startGame()">Replay</button>
         </div>
-        <button onClick="startGame()">Replay</button> 
-    </div>
+        </div>
+        
         <script src="game.js"></script>
     </body>
 </html>

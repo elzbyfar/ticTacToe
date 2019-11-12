@@ -1,6 +1,8 @@
 let origBoard;
 const huPlayer = 'O';
 const aiPlayer = 'X';
+// huPlayer = onclick.document.querySelector('o');
+// aiPlayer = onclick.document.querySelector('x');
 const winCombos = [
     [0, 1, 2],
     [3, 4, 5],
@@ -19,10 +21,11 @@ function startGame() {
     document.querySelector(".endGame").style.display = "none";
     origBoard = Array.from(Array(9).keys());
     for (var i = 0; i < cells.length; i++) {
+        
         cells[i].innerText = '';
         cells[i].style.removeProperty('background-color');
         cells[i].addEventListener('click', turnClick, false);
-    }
+        }
 }
 
 function turnClick(square) {
@@ -36,7 +39,8 @@ function turn(squareId, player) {
     origBoard[squareId] = player;
     document.getElementById(squareId).innerText = player;
     let gameWon = checkWin(origBoard, player)
-    if (gameWon) gameOver(gameWon)
+    if (gameWon) gameOver(gameWon);
+
 }
 
 function checkWin(board, player) {
@@ -55,12 +59,12 @@ function checkWin(board, player) {
 function gameOver(gameWon) {
     for (let index of winCombos[gameWon.index]) {
         document.getElementById(index).style.backgroundColor = 
-        gameWon.player == huPlayer ? "beige" : "brown";
+        gameWon.player == huPlayer ? "teal" : "grey";
     }
     for (var i = 0; i < cells.length; i++) {
         cells[i].removeEventListener('click', turnClick, false);
     }
-    declareWinner(gameWon.player == huPlayer ? "You Win!" : "You Lose.")
+    declareWinner(gameWon.player == huPlayer ? "YOU WIN!" : "YOU LOSE.")
 }
 
 function declareWinner(who) {
@@ -79,10 +83,10 @@ function bestSpot() {
 function checkTie() {
     if (emptySquares().length == 0) {
         for (var i = 0; i < cells.length; i++) {
-            cells[i].style.backgroundColor = "maroon";
+            cells[i].style.backgroundColor = "grey";
             cells[i].removeEventListener('click', turnClick, false);
         }
-        declareWinner("Draw")
+        declareWinner("DRAW")
         return true;
     }
     return false;
