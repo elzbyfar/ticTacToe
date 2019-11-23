@@ -14,6 +14,7 @@ The latest Google Chrome or Mozilla Firefox.
 
    * Two player option. 
    * Tally up point system. 
+   * Add 1000 millisecond interval between human player and AI player. 
 
 
 ## Contributing
