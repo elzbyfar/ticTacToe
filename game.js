@@ -1,8 +1,6 @@
-let origBoard;
-const huPlayer = 'O';
-const aiPlayer = 'X';
-// huPlayer = onclick.document.querySelector('o');
-// aiPlayer = onclick.document.querySelector('x');
+var origBoard;
+const huPlayer = 'o';
+const aiPlayer = 'x';
 const winCombos = [
     [0, 1, 2],
     [3, 4, 5],
@@ -21,7 +19,6 @@ function startGame() {
     document.querySelector(".endGame").style.display = "none";
     origBoard = Array.from(Array(9).keys());
     for (var i = 0; i < cells.length; i++) {
-        
         cells[i].innerText = '';
         cells[i].style.removeProperty('background-color');
         cells[i].addEventListener('click', turnClick, false);
@@ -31,7 +28,7 @@ function startGame() {
 function turnClick(square) {
     if (typeof origBoard[square.target.id] == 'number') {
         turn(square.target.id, huPlayer)
-        if (!checkTie()) turn(bestSpot(), aiPlayer);
+        if (!checkTie(origBoard, huPlayer) && !checkTie()) turn(bestSpot(), aiPlayer);
     }
 }
 
@@ -40,7 +37,6 @@ function turn(squareId, player) {
     document.getElementById(squareId).innerText = player;
     let gameWon = checkWin(origBoard, player)
     if (gameWon) gameOver(gameWon);
-
 }
 
 function checkWin(board, player) {
@@ -64,7 +60,7 @@ function gameOver(gameWon) {
     for (var i = 0; i < cells.length; i++) {
         cells[i].removeEventListener('click', turnClick, false);
     }
-    declareWinner(gameWon.player == huPlayer ? "YOU WIN!" : "YOU LOSE.")
+    declareWinner(gameWon.player == huPlayer ? "YOU WIN" : "YOU LOSE")
 }
 
 function declareWinner(who) {
@@ -93,9 +89,9 @@ function checkTie() {
 }
 
 function minimax(newBoard, player) {
-    var availSpots = emptySquares(newBoard);
+    var availSpots = emptySquares();
 
-    if (checkWin(newBoard, player)) {
+    if (checkWin(newBoard, huPlayer)) {
         return {score: -10};
     } else if (checkWin(newBoard, aiPlayer)) {
         return {score: 10};
